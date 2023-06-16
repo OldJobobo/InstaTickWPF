@@ -43,6 +43,11 @@ namespace InstaTickWPF
             _viewModel.RequestClose -= CloseMethod; // Unsubscribe from RequestClose event here
             this.Close(); // Calls the base class's Close method
         }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            categoryComboBox.ItemsSource = MainViewModel.Categories; // Replace with your list of categories
+            categoryComboBox.DisplayMemberPath = "CategoryName"; // Replace with the property of Category that you want to display
+        }
 
         private void Window_Closed(object sender, EventArgs e)
         {
