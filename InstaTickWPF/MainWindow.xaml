@@ -1,0 +1,78 @@
+﻿<Window x:Class="InstaTickWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InstaTickWPF"
+        xmlns:adonis="https://github.com/benruehl/adonis-ui"
+
+        mc:Ignorable="d"
+        Title="MainWindow" Height="650" Width="1000">
+    
+    <Window.Style>
+        <Style TargetType="Window" BasedOn="{StaticResource {x:Type Window}}"/>
+    </Window.Style>
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New" />
+                <MenuItem Header="Open" Click="Open_Click"/>
+
+                <MenuItem Header="_Save" Click="Save_Click" />
+                <Separator />
+                <MenuItem Header="_Exit"  Click="Exit_Click" />
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Header="_Copy" />
+                <MenuItem Header="_Paste" />
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_About" />
+            </MenuItem>
+        </Menu>
+
+        <Grid DockPanel.Dock="Left" Width="200">
+            <ListBox Margin="10" Name="categoryListView" ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <ListBox Grid.Row="0" Margin="10" Name="taskListView" ItemsSource="{Binding Tasks}" SelectedItem="{Binding SelectedTask}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical" MinHeight="50">
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding IsComplete}" Width="25"/>
+                                <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="Bold" Margin="5,0,0,0"/>
+                            </StackPanel>
+                            <TextBlock Text="{Binding Description}" FontSize="12" Margin="30,0,0,0"/>
+                            <StackPanel Orientation="Horizontal" Margin="30,0,0,0">
+                                <TextBlock Text="{Binding DueDate, StringFormat='Due: {0:dd MMM yyyy}'}" FontSize="12"/>
+                                <TextBlock Text="{Binding Priority, StringFormat='Priority: {0}'}" FontSize="12" Margin="10,0,0,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+
+
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <Button Margin="10" Content="Add Task" Command="{Binding AddTaskCommand}" />
+                <Button Margin="10" Content="Remove Task" Command="{Binding RemoveTaskCommand}" />
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</Window>
