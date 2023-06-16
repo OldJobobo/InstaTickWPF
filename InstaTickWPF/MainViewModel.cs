@@ -17,6 +17,9 @@ namespace InstaTickWPF
 
         private ObservableCollection<Task> _tasks = new ObservableCollection<Task>();
 
+        public ObservableCollection<CategoryViewModel> Categories { get; set; }
+
+
         public ObservableCollection<Task> Tasks
         {
             get => _tasks;
@@ -41,7 +44,12 @@ namespace InstaTickWPF
 
             Tasks = new ObservableCollection<Task>();
 
-            
+            Categories = new ObservableCollection<CategoryViewModel>();
+            // populate the Categories collection
+            Categories.Add(new CategoryViewModel(new Category { Name = "Work" }));
+            Categories.Add(new CategoryViewModel(new Category { Name = "Personal" }));
+          
+
             RemoveTaskCommand = new RelayCommand(
                 execute: () => {
                     if (SelectedTask != null)

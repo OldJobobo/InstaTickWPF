@@ -38,6 +38,8 @@ namespace InstaTickWPF
         private void Open_Click(object sender, RoutedEventArgs e)
         {
             var openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "JSON files (*.json)|*.json";
+
             if (openFileDialog.ShowDialog() == true)
             {
                 var binaryFormatter = new BinaryFormatter();
@@ -52,6 +54,8 @@ namespace InstaTickWPF
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             var saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "JSON files (*.json)|*.json";
+
             if (saveFileDialog.ShowDialog() == true)
             {
                 var binaryFormatter = new BinaryFormatter();
