@@ -24,7 +24,9 @@
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
             <Label Width="100" Content="Category"/>
-            <ComboBox x:Name="categoryComboBox" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120"/>
+            <ComboBox x:Name="categoryComboBox"  
+                      ItemsSource="{Binding Categories}" 
+                      DisplayMemberPath="Name" Width="200" />
 
         </StackPanel>
 

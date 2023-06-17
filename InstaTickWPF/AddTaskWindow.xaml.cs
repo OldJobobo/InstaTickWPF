@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace InstaTickWPF
 {
@@ -22,16 +24,19 @@ namespace InstaTickWPF
 
     public partial class AddTaskWindow : Window
     {
+
+        
+
         private AddTaskViewModel _viewModel;
        
 
-        public AddTaskWindow()
+        public AddTaskWindow(ObservableCollection<CategoryViewModel> categories)
         {
             InitializeComponent();
 
-          
+           
 
-            _viewModel = new AddTaskViewModel();
+            _viewModel = new AddTaskViewModel(categories);
             _viewModel.RequestClose += CloseMethod; // Subscribe to RequestClose event here
 
             this.DataContext = _viewModel;
@@ -43,15 +48,6 @@ namespace InstaTickWPF
             _viewModel.RequestClose -= CloseMethod; // Unsubscribe from RequestClose event here
             this.Close(); // Calls the base class's Close method
         }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            categoryComboBox.ItemsSource = MainViewModel.Categories; // Replace with your list of categories
-            categoryComboBox.DisplayMemberPath = "CategoryName"; // Replace with the property of Category that you want to display
-        }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            // _viewModel.RequestClose -= CloseMethod; // No need to unsubscribe here
-        }
+       
     }
 }

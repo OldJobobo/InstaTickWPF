@@ -64,7 +64,7 @@ namespace InstaTickWPF
 
         private void OpenAddTaskWindow()
         {
-            var addTaskViewModel = new AddTaskViewModel();
+            var addTaskViewModel = new AddTaskViewModel(Categories);
 
             addTaskViewModel.TaskAdded += task => Tasks.Add(task);
 

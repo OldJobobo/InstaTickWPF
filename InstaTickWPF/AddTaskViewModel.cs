@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
+using System.Collections.ObjectModel;
 
 namespace InstaTickWPF
 {
@@ -15,6 +16,9 @@ namespace InstaTickWPF
     {
         private string _title;
         private string _description;
+
+        public ObservableCollection<CategoryViewModel> Categories { get; set; }
+
 
         public event Action<Task> TaskAdded = delegate { };
         //public event Action RequestClose;
@@ -26,10 +30,12 @@ namespace InstaTickWPF
         public ICommand AddCommand { get; }
         public ICommand CancelCommand { get; }
 
-        public AddTaskViewModel()
+        public AddTaskViewModel(ObservableCollection<CategoryViewModel> categories)
         {
             // Set the default DueDate value when the ViewModel is created
             DueDate = DateTime.Today;
+
+            Categories = categories;
 
             AddCommand = new RelayCommand(AddTask);
 

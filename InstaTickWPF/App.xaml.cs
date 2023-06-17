@@ -13,5 +13,9 @@ namespace InstaTickWPF
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            StartupUri = new Uri("MainWindow.xaml", UriKind.Relative);
+        }
     }
 }

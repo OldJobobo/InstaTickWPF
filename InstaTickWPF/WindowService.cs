@@ -13,8 +13,21 @@ namespace InstaTickWPF
 
         public void OpenWindow(IWindowViewModel viewModel)
         {
-            // Create a new window and set its DataContext to the viewModel
-            var window = new AddTaskWindow { DataContext = viewModel };
+
+            Window window;
+
+            if (viewModel is AddTaskViewModel addTaskViewModel)
+            {
+                // Create a new AddTaskWindow and pass Categories to its constructor
+                window = new AddTaskWindow(addTaskViewModel.Categories) { DataContext = viewModel };
+            }
+            else
+            {
+                // Handle other window types here...
+                // For now, let's just create a blank Window for other types of view models
+                window = new Window() { DataContext = viewModel };
+            }
+
 
             // Subscribe to the RequestClose event
             viewModel.RequestClose += () => CloseWindow(viewModel);
