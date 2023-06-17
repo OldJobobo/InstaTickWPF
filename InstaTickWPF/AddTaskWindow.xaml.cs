@@ -34,7 +34,7 @@ namespace InstaTickWPF
         {
             InitializeComponent();
 
-           
+          
 
             _viewModel = new AddTaskViewModel(categories);
             _viewModel.RequestClose += CloseMethod; // Subscribe to RequestClose event here

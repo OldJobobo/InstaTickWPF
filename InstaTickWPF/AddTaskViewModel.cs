@@ -72,8 +72,8 @@ namespace InstaTickWPF
             }
         }
        
-        private Priority _priority;
-        public Priority Priority
+        private string _priority;
+        public string Priority
         {
             get => _priority;
             set
@@ -82,6 +82,18 @@ namespace InstaTickWPF
                 OnPropertyChanged();
             }
         }
+
+        private string _selectedPriority;
+        public string SelectedPriority
+        {
+            get { return _selectedPriority; }
+            set
+            {
+                _selectedPriority = value;
+                OnPropertyChanged(nameof(SelectedPriority));
+            }
+        }
+
         private bool _isComplete;
         public bool IsComplete
         {
@@ -98,11 +110,12 @@ namespace InstaTickWPF
             System.Diagnostics.Debug.WriteLine("AddTask method called");
 
             var task = new Task 
-            { 
-                Title = Title, 
-                Description = Description, 
-                DueDate = DueDate, 
-                Priority = Priority 
+            {
+                Title = this.Title,
+                Description = this.Description,
+                DueDate = this.DueDate,
+                IsComplete = false,
+                Priority = this.SelectedPriority
             };
             TaskAdded(task);
 

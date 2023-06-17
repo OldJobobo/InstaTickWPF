@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace InstaTickWPF
 {
-    public enum Priority
+    public static class Priority
     {
-        Low = 1,
-        Medium = 2,
-        High = 3,
-        Urgent = 4
+        public static string Low => "Low";
+        public static string Medium => "Medium";
+        public static string High => "High";
+        public static string Urgent => "Urgent";
     }
 
     [Serializable]
@@ -21,7 +21,7 @@ namespace InstaTickWPF
         public string Description { get; set; }
         public DateTime DueDate { get; set; }
         public bool IsComplete { get; set; }
-        public Priority Priority { get; set; }
+        public string Priority { get; set; }
     }
 
 
