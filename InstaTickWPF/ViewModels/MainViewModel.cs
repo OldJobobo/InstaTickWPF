@@ -18,6 +18,7 @@ namespace InstaTickWPF
         private ObservableCollection<Task> _tasks = new ObservableCollection<Task>();
 
         public ObservableCollection<CategoryViewModel> Categories { get; set; }
+        public ObservableCollection<PriorityViewModel> Priorities { get; set; }
 
 
         public ObservableCollection<Task> Tasks
@@ -48,7 +49,13 @@ namespace InstaTickWPF
             // populate the Categories collection
             Categories.Add(new CategoryViewModel(new Category { Name = "Work" }));
             Categories.Add(new CategoryViewModel(new Category { Name = "Personal" }));
-          
+
+            Priorities = new ObservableCollection<PriorityViewModel>();
+            // populate the Priorities collection
+            Priorities.Add(new PriorityViewModel(new Priority { Name = "Low" }));
+            Priorities.Add(new PriorityViewModel(new Priority { Name = "Medium" }));
+            Priorities.Add(new PriorityViewModel(new Priority { Name = "High" }));
+            Priorities.Add(new PriorityViewModel(new Priority { Name = "Urgent" }));
 
             RemoveTaskCommand = new RelayCommand(
                 execute: () => {
@@ -64,14 +71,14 @@ namespace InstaTickWPF
 
         private void OpenAddTaskWindow()
         {
-            var addTaskViewModel = new AddTaskViewModel(Categories);
+            var addTaskViewModel = new AddTaskViewModel(Categories, Priorities);
 
             addTaskViewModel.TaskAdded += task => Tasks.Add(task);
 
             _windowService.OpenWindow(addTaskViewModel);
         }
 
-
+/*
         public void AddTask()
         {
             var newTask = new Task
@@ -84,6 +91,7 @@ namespace InstaTickWPF
 
             Tasks.Add(newTask);
         }
+*/
 
         private bool CanAddTask(object obj)
         {

@@ -37,13 +37,21 @@
         </Menu>
 
         <Grid DockPanel.Dock="Left" Width="200">
-            <ListBox Style="{StaticResource MyListBoxStyle}" Margin="0" Name="categoryListView" ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Name}" FontSize="16" />
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            <StackPanel>
+                <TextBlock Text="Inbox" FontSize="16" Margin="9" MouseDown="Inbox_MouseDown"/>
+                <ListBox Style="{StaticResource MyListBoxStyle}" Margin="0" 
+                         Name="categoryListView" 
+                         ItemsSource="{Binding Categories}" 
+                         SelectedItem="{Binding SelectedCategory}"
+                         SelectionChanged="CategoryListView_SelectionChanged">
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" FontSize="16" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
         </Grid>
 
         <Grid>
@@ -60,10 +68,11 @@
                                 <CheckBox IsChecked="{Binding IsComplete}" Width="25"/>
                                 <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="Bold" Margin="5,0,0,0"/>
                             </StackPanel>
-                            <TextBlock Text="{Binding Description}" FontSize="12" Margin="30,0,0,0"/>
+                           
                             <StackPanel Orientation="Horizontal" Margin="30,0,0,0">
                                 <TextBlock Text="{Binding DueDate, StringFormat='Due: {0:dd MMM yyyy}'}" FontSize="12"/>
                                 <TextBlock Text="{Binding Priority, StringFormat='Priority: {0}'}" FontSize="12" Margin="10,0,0,0"/>
+                                <TextBlock Text="{Binding Category, StringFormat='Category: {0}'}" FontSize="12" Margin="10,0,0,0"/>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>

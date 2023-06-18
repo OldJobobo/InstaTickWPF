@@ -29,8 +29,8 @@
             <Label Width="100" Content="Category"/>
             <ComboBox x:Name="categoryComboBox"  
                       ItemsSource="{Binding Categories}" 
+                      SelectedItem="{Binding SelectedCategory}"
                       DisplayMemberPath="Name" Width="200" />
-
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,10">
@@ -41,13 +41,11 @@
         <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,0,0,10">
             <Label Width="100" Content="Priority"/>
 
-            <ComboBox Width="200" x:Name="Priority" 
-                SelectedItem="{Binding SelectedPriority, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                <ComboBoxItem Content="{x:Static local:Priority.Low}" />
-                <ComboBoxItem Content="{x:Static local:Priority.Medium}" />
-                <ComboBoxItem Content="{x:Static local:Priority.High}" />
-                <ComboBoxItem Content="{x:Static local:Priority.Urgent}" />
-            </ComboBox>
+            <ComboBox x:Name="prioritiesComboBox"
+                      ItemsSource="{Binding Priorities}" 
+                      SelectedItem="{Binding SelectedPriority}" 
+                      DisplayMemberPath="Name"/>
+
 
         </StackPanel>
 

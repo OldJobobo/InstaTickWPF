@@ -30,13 +30,13 @@ namespace InstaTickWPF
         private AddTaskViewModel _viewModel;
        
 
-        public AddTaskWindow(ObservableCollection<CategoryViewModel> categories)
+        public AddTaskWindow(ObservableCollection<CategoryViewModel> categories, ObservableCollection<PriorityViewModel> priorities )
         {
             InitializeComponent();
 
           
 
-            _viewModel = new AddTaskViewModel(categories);
+            _viewModel = new AddTaskViewModel(categories, priorities);
             _viewModel.RequestClose += CloseMethod; // Subscribe to RequestClose event here
 
             this.DataContext = _viewModel;

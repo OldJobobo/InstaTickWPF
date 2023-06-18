@@ -18,6 +18,9 @@ namespace InstaTickWPF
         private string _description;
 
         public ObservableCollection<CategoryViewModel> Categories { get; set; }
+        public ObservableCollection<PriorityViewModel> Priorities { get; set; }
+
+        // public List<string> Priorities { get; } = new List<string> { Priority.Low, Priority.Medium, Priority.High, Priority.Urgent };
 
 
         public event Action<Task> TaskAdded = delegate { };
@@ -30,12 +33,14 @@ namespace InstaTickWPF
         public ICommand AddCommand { get; }
         public ICommand CancelCommand { get; }
 
-        public AddTaskViewModel(ObservableCollection<CategoryViewModel> categories)
+        public AddTaskViewModel(ObservableCollection<CategoryViewModel> categories, ObservableCollection<PriorityViewModel> priorities)
         {
             // Set the default DueDate value when the ViewModel is created
             DueDate = DateTime.Today;
 
             Categories = categories;
+
+            Priorities = priorities;
 
             AddCommand = new RelayCommand(AddTask);
 
@@ -71,28 +76,30 @@ namespace InstaTickWPF
                 OnPropertyChanged();
             }
         }
-       
-        private string _priority;
-        public string Priority
+
+        private CategoryViewModel _selectedCategory;
+        public CategoryViewModel SelectedCategory
         {
-            get => _priority;
+            get => _selectedCategory;
             set
             {
-                _priority = value;
+                _selectedCategory = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _selectedPriority;
-        public string SelectedPriority
+
+        private PriorityViewModel _selectedPriority;
+        public PriorityViewModel SelectedPriority
         {
-            get { return _selectedPriority; }
+            get => _selectedPriority;
             set
             {
                 _selectedPriority = value;
-                OnPropertyChanged(nameof(SelectedPriority));
+                OnPropertyChanged();
             }
         }
+
 
         private bool _isComplete;
         public bool IsComplete
@@ -115,36 +122,21 @@ namespace InstaTickWPF
                 Description = this.Description,
                 DueDate = this.DueDate,
                 IsComplete = false,
-                Priority = this.SelectedPriority
+                Priority = SelectedPriority != null ? SelectedPriority.Name : null,
+                Category = SelectedCategory != null ? SelectedCategory.Name : null
             };
             TaskAdded(task);
 
-            /*System.Diagnostics.Debug.WriteLine(z"RequestClose event is null: " + (RequestClose == null));
-
-            if (RequestClose != null)
-            {
-                var invocationList = RequestClose.GetInvocationList();
-                System.Diagnostics.Debug.WriteLine("RequestClose invocation list count: " + invocationList.Length);
-            }
-
-            System.Diagnostics.Debug.WriteLine("About to invoke RequestClose event");
-            */
-
-
             RequestClose?.Invoke();
 
-            // Directly invoke the Close method here
-           //((AddTaskWindow)Application.Current.Windows.OfType<AddTaskWindow>().FirstOrDefault())?.CloseMethod();
         }
 
         private void CancelTask()
         {
             System.Diagnostics.Debug.WriteLine("CancelTask method called");
-            System.Diagnostics.Debug.WriteLine("About to invoke RequestClose event");
+
             RequestClose?.Invoke();
 
-            // Directly invoke the Close method here
-           // ((AddTaskWindow)Application.Current.Windows.OfType<AddTaskWindow>().FirstOrDefault())?.CloseMethod();
         }
 
 

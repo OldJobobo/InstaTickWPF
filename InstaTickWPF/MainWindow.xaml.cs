@@ -35,6 +35,32 @@ namespace InstaTickWPF
             this.DataContext = ViewModel;
         }
 
+        private void CategoryListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedCategory = (CategoryViewModel)categoryListView.SelectedItem;
+
+            if (selectedCategory != null)
+            {
+                var filteredTasks = ViewModel.Tasks.Where(task => task.Category == selectedCategory.Name);
+                taskListView.ItemsSource = new ObservableCollection<Task>(filteredTasks);
+            }
+            else
+            {
+                taskListView.ItemsSource = null;
+            }
+
+        }
+
+        private void Inbox_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // Clear selection from the categories ListBox.
+            categoryListView.SelectedItem = null;
+
+            // Show all tasks.
+            taskListView.ItemsSource = new ObservableCollection<Task>(ViewModel.Tasks);
+        }
+
+
         private void Open_Click(object sender, RoutedEventArgs e)
         {
             var openFileDialog = new OpenFileDialog();
@@ -70,6 +96,8 @@ namespace InstaTickWPF
         {
             this.Close();
         }
+
+
 
     }
 }
