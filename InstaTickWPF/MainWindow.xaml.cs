@@ -68,10 +68,10 @@ namespace InstaTickWPF
 
             if (openFileDialog.ShowDialog() == true)
             {
-                var binaryFormatter = new BinaryFormatter();
-                using (var fileStream = File.OpenRead(openFileDialog.FileName))
+                using (var reader = new StreamReader(openFileDialog.FileName))
                 {
-                    var tasks = (List<Task>)binaryFormatter.Deserialize(fileStream);
+                    string json = reader.ReadToEnd();
+                    var tasks = JsonConvert.DeserializeObject<List<Task>>(json);
                     ViewModel.Tasks = new ObservableCollection<Task>(tasks);
                 }
             }
@@ -84,13 +84,14 @@ namespace InstaTickWPF
 
             if (saveFileDialog.ShowDialog() == true)
             {
-                var binaryFormatter = new BinaryFormatter();
-                using (var fileStream = File.OpenWrite(saveFileDialog.FileName))
+                using (var writer = new StreamWriter(saveFileDialog.FileName))
                 {
-                    binaryFormatter.Serialize(fileStream, ViewModel.Tasks.ToList());
+                    string json = JsonConvert.SerializeObject(ViewModel.Tasks.ToList(), Formatting.Indented);
+                    writer.Write(json);
                 }
             }
         }
+
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {

@@ -49,6 +49,8 @@ namespace InstaTickWPF
             // populate the Categories collection
             Categories.Add(new CategoryViewModel(new Category { Name = "Work" }));
             Categories.Add(new CategoryViewModel(new Category { Name = "Personal" }));
+            Categories.Add(new CategoryViewModel(new Category { Name = "Health" }));
+            Categories.Add(new CategoryViewModel(new Category { Name = "Education" }));
 
             Priorities = new ObservableCollection<PriorityViewModel>();
             // populate the Priorities collection

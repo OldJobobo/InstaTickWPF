@@ -4,10 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InstaTickWPF"
-      
-      xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
-
-
+        xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
         mc:Ignorable="d"
         Title="InstaTick" Height="650" Width="1000"
         
@@ -27,10 +24,7 @@
                 <Separator />
                 <MenuItem Header="_Exit"  Click="Exit_Click" />
             </MenuItem>
-            <MenuItem Header="_Edit">
-                <MenuItem Header="_Copy" />
-                <MenuItem Header="_Paste" />
-            </MenuItem>
+            
             <MenuItem Header="_Help">
                 <MenuItem Header="_About" />
             </MenuItem>
@@ -66,9 +60,9 @@
                         <StackPanel Orientation="Vertical" MinHeight="50">
                             <StackPanel Orientation="Horizontal">
                                 <CheckBox IsChecked="{Binding IsComplete}" Width="25"/>
-                                <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="Bold" Margin="5,0,0,0"/>
+                                <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="Bold" Margin="5,0,0,0"/>
                             </StackPanel>
-                           
+                            <TextBlock Text="{Binding Description}" FontSize="14" FontWeight="Normal" Margin="30,0,0,0"/>
                             <StackPanel Orientation="Horizontal" Margin="30,0,0,0">
                                 <TextBlock Text="{Binding DueDate, StringFormat='Due: {0:dd MMM yyyy}'}" FontSize="12"/>
                                 <TextBlock Text="{Binding Priority, StringFormat='Priority: {0}'}" FontSize="12" Margin="10,0,0,0"/>

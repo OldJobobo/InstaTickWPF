@@ -14,7 +14,7 @@ namespace InstaTickWPF
 {
     public class AddTaskViewModel : IWindowViewModel
     {
-        private string _title;
+        private string _name;
         private string _description;
 
         public ObservableCollection<CategoryViewModel> Categories { get; set; }
@@ -31,6 +31,7 @@ namespace InstaTickWPF
         private readonly IWindowService _windowService;
 
         public ICommand AddCommand { get; }
+
         public ICommand CancelCommand { get; }
 
         public AddTaskViewModel(ObservableCollection<CategoryViewModel> categories, ObservableCollection<PriorityViewModel> priorities)
@@ -47,12 +48,12 @@ namespace InstaTickWPF
             CancelCommand = new RelayCommand(CancelTask);
         }
 
-        public string Title
+        public string Name
         {
-            get => _title;
+            get => _name;
             set
             {
-                _title = value;
+                _name = value;
                 OnPropertyChanged();
             }
         }
@@ -116,9 +117,15 @@ namespace InstaTickWPF
         {
             System.Diagnostics.Debug.WriteLine("AddTask method called");
 
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                MessageBox.Show("Task name cannot be empty.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             var task = new Task 
             {
-                Title = this.Title,
+                Name = this.Name,
                 Description = this.Description,
                 DueDate = this.DueDate,
                 IsComplete = false,

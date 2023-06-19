@@ -21,8 +21,23 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
-            <Label Width="100" Content="Title"/>
-            <TextBox Width="200" Text="{Binding Title}"/>
+            <Label Width="100" Content="Task Name"/>
+            <TextBox Width="200">
+                <TextBox.Text>
+                    <Binding Path="Name" UpdateSourceTrigger="PropertyChanged"/>
+                </TextBox.Text>
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsValid}" Value="false">
+                                <Setter Property="BorderBrush" Value="Red"/>
+                                <Setter Property="ToolTip" Value="Name cannot be empty."/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
