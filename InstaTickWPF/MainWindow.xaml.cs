@@ -33,6 +33,21 @@ namespace InstaTickWPF
 
             ViewModel = new MainViewModel();
             this.DataContext = ViewModel;
+            // Load tasks from "MyTasks.json" when application starts
+            LoadTasks("MyTasks.json");
+        }
+
+        private void LoadTasks(string filePath)
+        {
+            if (File.Exists(filePath))
+            {
+                using (var reader = new StreamReader(filePath))
+                {
+                    string json = reader.ReadToEnd();
+                    var tasks = JsonConvert.DeserializeObject<List<Task>>(json);
+                    ViewModel.Tasks = new ObservableCollection<Task>(tasks);
+                }
+            }
         }
 
         private void CategoryListView_SelectionChanged(object sender, SelectionChangedEventArgs e)

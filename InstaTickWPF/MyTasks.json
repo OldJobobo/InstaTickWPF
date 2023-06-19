@@ -64,11 +64,38 @@
   },
   {
     "IsComplete": false,
+    "Name": "Cook Dinner",
+    "DueDate": "2023-06-15T18:00:00-07:00",
+    "Priority": "Medium",
+    "Category": "Personal",
+    "Description": "Prepare dinner for the family",
+    "IsValid": true
+  },
+  {
+    "IsComplete": false,
     "Name": "Attend Meeting",
     "DueDate": "2023-06-20T00:00:00-07:00",
     "Priority": "High",
     "Category": "Work",
     "Description": "Attend project status meeting",
+    "IsValid": true
+  },
+ {
+    "IsComplete": false,
+    "Name": "Submit Project Proposal",
+    "DueDate": "2023-06-19T00:00:00-07:00",
+    "Priority": "Urgent",
+    "Category": "Work",
+    "Description": "Write and submit the project proposal",
+    "IsValid": true
+  },
+  {
+    "IsComplete": false,
+    "Name": "Pay Bills",
+    "DueDate": "2023-06-30T00:00:00-07:00",
+    "Priority": "High",
+    "Category": "Personal",
+    "Description": "Pay monthly bills",
     "IsValid": true
   },
   {
@@ -87,6 +114,15 @@
     "Priority": "Medium",
     "Category": "Health",
     "Description": "Routine dental checkup",
+    "IsValid": true
+  },
+{
+    "IsComplete": false,
+    "Name": "Pick Up Kids",
+    "DueDate": "2023-06-15T15:00:00-07:00",
+    "Priority": "High",
+    "Category": "Personal",
+    "Description": "Pick up kids from school",
     "IsValid": true
   }
 ]
