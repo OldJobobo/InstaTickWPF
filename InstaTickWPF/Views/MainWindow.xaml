@@ -31,8 +31,16 @@
         </Menu>
 
         <Grid DockPanel.Dock="Left" Width="200">
-            <StackPanel>
-                <TextBlock Text="Inbox" FontSize="16" Margin="9" MouseDown="Inbox_MouseDown"/>
+            <StackPanel Style="{StaticResource MyStackPanelStyle}">
+                <ListBox
+                      Name="inboxListView" 
+                    Style="{StaticResource MyListBoxStyle}" 
+                    SelectionChanged="Inbox_SelectionChanged">
+                    <ListBoxItem>
+                        <TextBlock Text="Inbox" FontSize="16" Margin="0" />
+                    </ListBoxItem>
+                    <!-- Other ListBoxItems can go here -->
+                </ListBox>
                 <ListBox Style="{StaticResource MyListBoxStyle}" Margin="0" 
                          Name="categoryListView" 
                          ItemsSource="{Binding Categories}" 

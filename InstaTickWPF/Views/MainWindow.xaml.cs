@@ -58,6 +58,8 @@ namespace InstaTickWPF
             {
                 var filteredTasks = ViewModel.Tasks.Where(task => task.Category == selectedCategory.Name);
                 taskListView.ItemsSource = new ObservableCollection<Task>(filteredTasks);
+                // When an item in the categoryListView is selected, clear the selection in the Inbox ListBox.
+                inboxListView.SelectedItem = null;
             }
             else
             {
@@ -66,13 +68,27 @@ namespace InstaTickWPF
 
         }
 
-        private void Inbox_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            // Clear selection from the categories ListBox.
-            categoryListView.SelectedItem = null;
+       
 
-            // Show all tasks.
-            taskListView.ItemsSource = new ObservableCollection<Task>(ViewModel.Tasks);
+        private void Inbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // You can check if the selected item is your "Inbox" item. 
+            // Here's an example of how you might do that:
+            ListBox listBox = sender as ListBox;
+            ListBoxItem selectedItem = listBox.SelectedItem as ListBoxItem;
+            if (selectedItem != null)
+            {
+                TextBlock content = selectedItem.Content as TextBlock;
+
+                if (content.Text == "Inbox")
+                {
+                    // Clear selection from the categories ListBox.
+                    categoryListView.SelectedItem = null;
+
+                    // Show all tasks.
+                    taskListView.ItemsSource = new ObservableCollection<Task>(ViewModel.Tasks);
+                }
+            }
         }
 
 
