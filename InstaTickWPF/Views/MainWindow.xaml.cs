@@ -25,16 +25,23 @@ namespace InstaTickWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainViewModel ViewModel { get; set; }
 
-        public MainWindow()
+        private readonly IWindowService _windowService;
+
+
+        public MainWindow(IWindowService windowService)
         {
             InitializeComponent();
+
+            _windowService = windowService;
 
             ViewModel = new MainViewModel();
             this.DataContext = ViewModel;
             // Load tasks from "MyTasks.json" when application starts
             LoadTasks("MyTasks.json");
+            _windowService = windowService;
         }
 
         private void LoadTasks(string filePath)
@@ -68,7 +75,16 @@ namespace InstaTickWPF
 
         }
 
-       
+        private void taskListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (taskListView.SelectedItem is Task selectedTask)
+            {
+                var taskDetailsViewModel = new TaskDetailsViewModel(selectedTask, ViewModel.Categories, ViewModel.Priorities);
+                _windowService.OpenWindow(taskDetailsViewModel);
+            }
+
+        }
+
 
         private void Inbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

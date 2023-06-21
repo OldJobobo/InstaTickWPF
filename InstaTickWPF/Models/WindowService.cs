@@ -21,6 +21,11 @@ namespace InstaTickWPF
                 // Create a new AddTaskWindow and pass Categories to its constructor
                 window = new AddTaskWindow(addTaskViewModel.Categories, addTaskViewModel.Priorities) { DataContext = viewModel };
             }
+            if (viewModel is TaskDetailsViewModel TaskDetailsViewModel)
+            {
+                // Create a new AddTaskWindow and pass Categories to its constructor
+                window = new AddTaskWindow(TaskDetailsViewModel.Categories, TaskDetailsViewModel.Priorities) { DataContext = viewModel };
+            }
             else
             {
                 // Handle other window types here...

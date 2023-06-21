@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -33,6 +34,13 @@ namespace InstaTickWPF
         public bool IsComplete { get; set; }
         public string Priority { get; set; }
         public string Category { get; set; }
+
+        public ObservableCollection<SubTask> SubTasks { get; set; }
+
+        public Task()
+        {
+            SubTasks = new ObservableCollection<SubTask>();
+        }
 
         public bool IsValid
         {
